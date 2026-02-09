@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Monne, Sond und Terne</title>
+    <link rel="stylesheet" href="css/toolbar.css" />
+    <link rel="stylesheet" href="css/book.css" />
+  </head>
+  <body>
+  <div class="stage" id="stage">
+      <div id="book" class="book"></div>
+	</div>
+
+    <div class="toolbar" id="editorToolbar">
+      <button id="editButton" type="button">Edit Page</button>
+      <button id="saveButton" type="button" disabled>Save</button>
+      <button id="addButton" type="button">Add Spread</button>
+      <span id="pageLabel" class="page-label"></span>
+    </div>
+
+    <script src="./node_modules/page-flip/dist/js/page-flip.browser.js"></script>
+    <script src="./node_modules/tinymce/tinymce.min.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
