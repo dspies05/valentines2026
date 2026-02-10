@@ -19,23 +19,14 @@ function images_upload_handler(blobInfo) {
     const formData = new FormData();
     formData.append("file", blobInfo.blob(), blobInfo.filename());
     return fetch(`${apiBase}/api/images`, { method: "POST", body: formData })
-        .then(async (res) => {
-        if (!res.ok) {
-            let message = "Upload failed.";
-            try {
-                const data = await res.json();
-                if (data?.error)
-                    message = data.error;
-            }
-            catch { }
-            throw new Error(message);
-        }
+        .then((res) => {
+        if (!res.ok)
+            throw new Error("Upload failed.");
         return res.json();
     })
         .then((data) => {
-        if (!data?.location) {
+        if (!data?.location)
             throw new Error("Upload response missing location.");
-        }
         return data.location;
     });
 }

@@ -1,10 +1,11 @@
 import { EditablePageFlip } from "./editablePageFlip.js";
 
 //GLOBALS
-let establishedConnection = true;
+const apiBase = "http://localhost:3001";
 const pages = [];
 const stage = document.getElementById("stage");
 const book = document.getElementById("book");
+const editorToolbar = document.getElementById("editorToolbar");
 const editButton = document.getElementById("editButton");
 const saveButton = document.getElementById("saveButton");
 const addButton = document.getElementById("addButton");
@@ -17,59 +18,47 @@ function newPage(){
   return page;
 }
 
-async function initPages() {
-  try{
-    const apiBase = "http://localhost:3001";
-    const res = await fetch(`${apiBase}/api/pages`, { method: "GET" });
-
-    if (!res.ok) {
-      let message = "GET pages failed.";
-      try {
-        const data = await res.json();
-        if (data?.error) message = data.error;
-      } catch {}
-      throw new Error(message);
-    }
-
-    const pageStorage = await res.json();
-    const storedPages = Array.isArray(pageStorage?.pages) ? pageStorage.pages : [];
-
-    pages.length = 0;
-    for (const page of storedPages) {
-      if (typeof page?.html !== "string") continue;
-      const template = document.createElement("template");
-      template.innerHTML = page.html.trim();
-      const element = template.content.firstElementChild;
-      if (element) pages.push(element);
-    }
+async function login(){
+  const password = prompt("Enter password:");
+  const res = await fetch(`${apiBase}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password })
+  });
+  if (res.ok) {
+    init();
+  } else {
+    login();
   }
-  catch (error){
-    establishedConnection = false;
-    if(pages.length <= 3){
-    for(let i = 0; i < 4; i++){
-      const page = document.createElement("div")
-      switch(i){
-        case 0: 
-          page.className = "page frontcover"
-          page.setAttribute("data-density", "hard")
-          break;
-        case 3:
-          page.className = "page backcover";
-          page.setAttribute("data-density", "hard")
-          break;
-        default: 
-          page.className = "page";
-          break;
-      }
-      page.innerHTML = `<div class="inner"></div>`
-      pages.push(page);
-    }
-  }
+
 }
+
+async function initPages() {
+  const res = await fetch(`${apiBase}/api/pages`, { method: "GET" });
+
+  if (!res.ok) {
+    let message = "GET pages failed.";
+    try {
+      const data = await res.json();
+      if (data?.error) message = data.error;
+    } catch {}
+    throw new Error(message);
+  }
+
+  const pageStorage = await res.json();
+  const storedPages = Array.isArray(pageStorage?.pages) ? pageStorage.pages : [];
+
+  pages.length = 0;
+  for (const page of storedPages) {
+    if (typeof page?.html !== "string") continue;
+    const template = document.createElement("template");
+    template.innerHTML = page.html.trim();
+    const element = template.content.firstElementChild;
+    if (element) pages.push(element);
+  }
 }
 
 async function savePages() {
-  const apiBase = "http://localhost:3001";
   const pagesToSave = Array.from(editablePageFlip.getPages());
 
   const payloadPages = pagesToSave
@@ -97,7 +86,12 @@ async function savePages() {
   return res.json();
 }
 
+function showToolbar(){
+  editorToolbar.style.display = "inline-flex";
+}
+
 async function init() {
+  showToolbar();
   await initPages();
   editablePageFlip.loadFromHTML(pages);
 
@@ -119,4 +113,4 @@ async function init() {
     editablePageFlip.appendPages([newPage(), newPage()]);
   });
 }
-init().catch((err) => console.error(err));
+login();
