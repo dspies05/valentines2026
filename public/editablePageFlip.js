@@ -15,10 +15,10 @@ var PageState;
     PageState[PageState["UNKNOWN"] = 3] = "UNKNOWN";
 })(PageState || (PageState = {}));
 function images_upload_handler(blobInfo) {
-    const apiBase = window.API_BASE_URL || "http://localhost:3001";
+    const apiBase = window.API_BASE_URL || window.location.origin;
     const formData = new FormData();
     formData.append("file", blobInfo.blob(), blobInfo.filename());
-    return fetch(`${apiBase}/api/images`, { method: "POST", body: formData })
+    return fetch(`${apiBase}/api/images.php`, { method: "POST", body: formData })
         .then((res) => {
         if (!res.ok)
             throw new Error("Upload failed.");

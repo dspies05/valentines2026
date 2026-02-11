@@ -28,7 +28,7 @@ body {
 .page {
   background: var(--paper);
   box-shadow: 0 12px 24px var(--shadow);
-  border-radius: 0px;
+  border-radius: 10px;
   overflow: hidden;
 }
 

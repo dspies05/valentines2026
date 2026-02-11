@@ -1,7 +1,7 @@
 import { EditablePageFlip } from "./editablePageFlip.js";
 
 //GLOBALS
-const apiBase = "http://localhost:3001";
+const apiBase = window.location.origin + "/api";
 const pages = [];
 const stage = document.getElementById("stage");
 const book = document.getElementById("book");
@@ -20,7 +20,7 @@ function newPage(){
 
 async function login(){
   const password = prompt("Enter password:");
-  const res = await fetch(`${apiBase}/login`, {
+  const res = await fetch(`${apiBase}/login.php`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ password })
@@ -34,7 +34,7 @@ async function login(){
 }
 
 async function initPages() {
-  const res = await fetch(`${apiBase}/api/pages`, { method: "GET" });
+  const res = await fetch(`${apiBase}/pages.php`, { method: "GET" });
 
   if (!res.ok) {
     let message = "GET pages failed.";
@@ -68,7 +68,7 @@ async function savePages() {
     }))
     .filter((page) => page.html);
 
-  const res = await fetch(`${apiBase}/api/pages`, {
+  const res = await fetch(`${apiBase}/pages.php`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ pages: payloadPages }),
@@ -88,6 +88,9 @@ async function savePages() {
 
 function showToolbar(){
   editorToolbar.style.display = "inline-flex";
+  editButton.style.display = "inline-flex";
+  saveButton.style.display = "inline-flex";
+  addButton.style.display = "inline-flex";
 }
 
 async function init() {

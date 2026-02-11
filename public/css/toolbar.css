@@ -3,7 +3,7 @@
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  display: none;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 10px 16px;
