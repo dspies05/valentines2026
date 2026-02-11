@@ -19,6 +19,15 @@ function newPage(){
 }
 
 async function login(){
+  const session = await fetch(`${apiBase}/session.php`, {
+    method: "POST",
+    body: {},
+  })
+  if(session.ok){
+    init();
+    return;
+  }
+
   const password = prompt("Enter password:");
   const res = await fetch(`${apiBase}/login.php`, {
     method: "POST",

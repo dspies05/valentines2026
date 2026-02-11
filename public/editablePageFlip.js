@@ -36,9 +36,9 @@ export class EditablePageFlip {
         this.pageState = PageState.UNKNOWN;
         this.bookState = BookState.VIEW;
         this.pageFlipConfig = {
-            width: 440,
-            height: 520,
-            size: "fixed",
+            width: 5,
+            height: 7,
+            size: "stretch",
             maxShadowOpacity: 0.5,
             showCover: true,
             mobileScrollSupport: false,

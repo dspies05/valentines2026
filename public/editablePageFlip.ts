@@ -48,9 +48,9 @@ export class EditablePageFlip{
     private book: HTMLElement;
     private bookContainer: HTMLElement;
     private pageFlipConfig: Partial<FlipSetting> = {
-        width: 440,
-        height: 520,
-        size: "fixed",
+        width: 5,
+        height: 7,
+        size: "stretch",
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
