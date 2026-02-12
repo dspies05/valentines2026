@@ -44,8 +44,16 @@ img {
   padding-right: 0.5rem;
   padding-top: 2rem;
   height: 100%;
-  box-sizing: border-box;
+  font-size: 1rem;
+  /* Responsive font size for smaller devices */
+  @media (max-width: 600px) {
+    font-size: 0.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 1rem;
+  }
 }
+
 
 .backcover {
   background: linear-gradient(135deg, #2b201a, #4a332a);

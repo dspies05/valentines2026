@@ -59,8 +59,10 @@ export class EditablePageFlip{
         license_key: "gpl",
         menubar: false,
         statusbar: false,
-        plugins: "image",
-        toolbar: "undo redo | bold italic underline | bullist numlist | image",
+        plugins: ["image", "lists"],
+        content_css: 'css/book.css',
+        toolbar: "undo | blocks | italic bullist | image",
+        block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2;',
         images_upload_handler: images_upload_handler
     };
     private editors: Editor[] = [];
