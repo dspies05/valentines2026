@@ -61,7 +61,7 @@ export class EditablePageFlip{
         statusbar: false,
         plugins: ["image", "lists"],
         content_css: 'css/book.css',
-        toolbar: "undo | blocks | italic bullist | image",
+        toolbar: "undo | blocks | aligncenter italic bullist | image",
         block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2;',
         images_upload_handler: images_upload_handler
     };
