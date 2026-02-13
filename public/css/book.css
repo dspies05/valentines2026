@@ -46,6 +46,9 @@ img {
     font-size: 0.65em !important;      /* smaller font */
   }
 
+}
+
+@media (max-width: 250px) or (max-height: 350px) {
   /* Adjust TinyMCE content body */
   .mce-content-body {
     margin-left: 2vmin;
