@@ -61,7 +61,9 @@ export class EditablePageFlip{
         statusbar: false,
         plugins: ["image", "lists"],
         content_css: 'css/book.css',
+        height: "100%",
         toolbar: "undo | blocks | aligncenter italic bullist | image",
+        toolbar_location: "bottom",
         block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2;',
         images_upload_handler: images_upload_handler
     };
@@ -190,5 +192,17 @@ export class EditablePageFlip{
             this.switchToViewMode();
         }
         this.turnToPage(index);
+    }
+    public getPageFlip(): PageFlip{
+        return this.pageFlip;
+    }
+
+    public redraw(): void{
+        if(this.bookState === BookState.EDIT){
+            this.editPage();
+        }
+        else if(this.bookState === BookState.VIEW){
+            this.viewPage();
+        }
     }
 }

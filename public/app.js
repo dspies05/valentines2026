@@ -107,6 +107,10 @@ async function init() {
   await initPages();
   editablePageFlip.loadFromHTML(pages);
 
+  window.addEventListener("resize", () => {
+  editablePageFlip.redraw();
+});
+
   editButton.addEventListener("click", () => {
     saveButton.disabled = false;
     editButton.disabled = true;
