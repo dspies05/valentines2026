@@ -1,7 +1,7 @@
 <?php
 $raw = file_get_contents("php://input");
 $data = json_decode($raw, true);
-$password = "";
+$password = getenv('LOGIN_PASSWORD');
 
 if (!is_array($data) || !isset($data["password"])) {
     http_response_code(400);
