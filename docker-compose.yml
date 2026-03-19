@@ -1,0 +1,10 @@
+services:
+  web:
+    image: valentines2026:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+    - ./public:/var/www/valentines2026
+    env_file:
+    - .env
