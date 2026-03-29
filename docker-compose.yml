@@ -8,3 +8,4 @@ services:
     - ./public:/var/www/valentines2026
     env_file:
     - .env
+    restart: unless-stopped
